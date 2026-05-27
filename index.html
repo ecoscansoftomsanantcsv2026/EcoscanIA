@@ -1,229 +1,341 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>EcoScan IA</title>
- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.3/dist/teachablemachine-image.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EcoScan IA</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.3/dist/teachablemachine-image.min.js"></script>
+
 <style>
- * { box-sizing: border-box; }
- body {
- margin: 0;
- font-family: Arial, sans-serif;
- background: linear-gradient(135deg, #dfffea, #dff3ff, #fff7d6);
- color: #123;
- min-height: 100vh;
- display: flex;
- justify-content: center;
- align-items: center;
- padding: 20px;
- }
- .app {
- width: min(980px, 100%);
- background: rgba(255,255,255,0.92);
- border-radius: 28px;
- box-shadow: 0 20px 60px rgba(0,0,0,0.18);
- overflow: hidden;
- display: grid;
- grid-template-columns: 1fr 1fr;
- }
- .hero {
- padding: 32px;
- background: #0f7b4f;
- color: white;
- }
- .hero h1 { font-size: 42px; margin: 0 0 10px; }
- .hero p { font-size: 18px; line-height: 1.4; }
- .mascota {
- font-size: 88px;
- text-align: center;
- margin: 24px 0;
- animation: flotar 2.4s ease-in-out infinite;
- }
- @keyframes flotar {
- 0%,100% { transform: translateY(0); }
- 50% { transform: translateY(-10px); }
- }
- .panel { padding: 32px; }
- button {
- border: none;
- border-radius: 18px;
- padding: 14px 20px;
- background: #ffbf00;
- color: #222;
- font-weight: bold;
- font-size: 16px;
- cursor: pointer;
- box-shadow: 0 8px 20px rgba(0,0,0,0.18);
- }
- button: hover { transform: scale(1.03); }
- #webcam-container canvas, #webcam-container video {
- width: 100%;
- max-width: 360px;
- border-radius: 22px;
- border: 6px solid #e7f7ee;
- margin-top: 18px;
- }
- .resultado {
- margin-top: 18px;
- padding: 22px;
- border-radius: 24px;
- background: #f5f7fb;
- border: 2px solid #e5e8ef;
- }
- .categoria { font-size: 30px; font-weight: bold; margin-bottom: 6px; }
- .contenedor { font-size: 18px; margin-bottom: 14px; }
- .barra {
- height: 18px;
- background: #ddd;
- border-radius: 20px;
- overflow: hidden;
- margin: 10px 0 14px;
- }
- .relleno {
- height: 100%;
- width: 0%;
- background: #0f7b4f;
- transition: width 0.4s ease;
- }
- .mensaje {
- font-size: 17px;
- line-height: 1.35;
- background: white;
- border-radius: 16px;
- padding: 14px;
- }
- .reto {
- margin-top: 14px;
- font-weight: bold;
- color: #0f7b4f;
- }
- @media (max-width: 760px) {
- .app { grid-template-columns: 1fr; }
- .hero h1 { font-size: 34px; }
- }
- </style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#dfffea,#dff3ff,#fff7d6);
+    color:#123;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.app{
+    width:min(980px,100%);
+    background:rgba(255,255,255,0.92);
+    border-radius:28px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.18);
+    overflow:hidden;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+}
+
+.hero{
+    padding:32px;
+    background:#0f7b4f;
+    color:white;
+}
+
+.hero h1{
+    font-size:42px;
+}
+
+.hero p{
+    font-size:18px;
+}
+
+.mascota{
+    font-size:88px;
+    text-align:center;
+    margin:24px 0;
+}
+
+.panel{
+    padding:32px;
+}
+
+button{
+    border:none;
+    border-radius:18px;
+    padding:14px 20px;
+    background:#ffbf00;
+    color:#222;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    transform:scale(1.03);
+}
+
+#webcam-container canvas{
+    width:100%;
+    max-width:360px;
+    border-radius:22px;
+    border:6px solid #e7f7ee;
+    margin-top:18px;
+}
+
+.resultado{
+    margin-top:18px;
+    padding:22px;
+    border-radius:24px;
+    background:#f5f7fb;
+    border:2px solid #e5e8ef;
+}
+
+.barra{
+    height:18px;
+    background:#ddd;
+    border-radius:20px;
+    overflow:hidden;
+    margin:10px 0 14px;
+}
+
+.relleno{
+    height:100%;
+    width:0%;
+    background:#0f7b4f;
+}
+
+@media(max-width:760px){
+
+    .app{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
 </head>
+
 <body>
- <main class="app">
- 	<section class="hero">
- <h1>EcoScan IA</h1>
- <p>Apunta la camara a un residuo y descubre como separarlo correctamente.</p>
- <div class="mascota" id="mascota"> </div> 🤖♻️
- <p><strong>Reto:</strong> clasifica 5 residuos diferentes y conviertete en Guardian del Planeta.</p>
- </section>
- <section class="panel">
- <button onclick="init()">Iniciar camara e IA</button>
- <div id="webcam-container"></div>
- <div class="resultado" id="resultado">
- <div class="categoria" id="categoria">Esperando residuo...</div>
- <div class="contenedor" id="contenedor">Presiona iniciar y muestra un objeto.</div>
- <div class="barra"><div class="relleno" id="relleno"></div></div>
- <div id="confianza">Confianza: 0%</div>
- <div class="mensaje" id="mensaje">EcoBot te dara una recomendacion cuando detecte un residuo.</div>
- <div class="reto" id="reto">Puntos verdes: 0</div>
- </div>
- </section>
- </main>
+
+<main class="app">
+
+<section class="hero">
+
+<h1>EcoScan IA</h1>
+
+<p>
+Apunta la cámara a un residuo y descubre cómo separarlo correctamente.
+</p>
+
+<div class="mascota" id="mascota">🤖♻️</div>
+
+<p>
+<strong>Reto:</strong>
+clasifica 5 residuos diferentes.
+</p>
+
+</section>
+
+<section class="panel">
+
+<button onclick="init()">
+Iniciar cámara e IA
+</button>
+
+<div id="webcam-container"></div>
+
+<div class="resultado" id="resultado">
+
+<h2 id="categoria">
+Esperando residuo...
+</h2>
+
+<div id="contenedor">
+Presiona iniciar.
+</div>
+
+<div class="barra">
+<div class="relleno" id="relleno"></div>
+</div>
+
+<div id="confianza">
+Confianza: 0%
+</div>
+
+<div id="mensaje">
+EcoBot está listo.
+</div>
+
+<div id="reto">
+Puntos verdes: 0
+</div>
+
+</div>
+
+</section>
+
+</main>
+
 <script>
- const URL = "PEGA_AQUI_LA_URL_DE_TU_MODELO/";
- let model, webcam, maxPredictions;
- let puntos = 0;
- let ultimaCategoria = "";
- const datos = {
- "Plastico": {
- color: "#f6c344",
- icono: " ", 🟡
- contenedor: "Contenedor de reciclables / plastico",
- mensaje: "Si esta limpio y seco, puede reciclarse. Si tiene comida o liquidos, limpialo antes de depositarlo."
- },
- "Papel/Carton": {
- color: "#3d8bfd",
- icono: " ", 🔵
- contenedor: "Contenedor de papel y carton",
- mensaje: "Debe estar seco y sin grasa. Una caja de pizza con grasa puede contaminar otros residuos."
- },
- "Vidrio": {
- color: "#35b779",
- icono: " ", 🟢
- contenedor: "Contenedor de vidrio",
- mensaje: "Depositalo con cuidado. Evita mezclarlo con ceramica, espejos o bombillos."
- },
- "Metal": {
- color: "#9aa0a6",
- icono: " ", ⚙️
- contenedor: "Contenedor de reciclables / metal",
- mensaje: "Latas y envases metalicos pueden reciclarse si estan vacios y relativamente limpios."
- },
- "Organico": {
- color: "#8b5e34",
- icono: " ", 🟤
- contenedor: "Contenedor organico o compostaje",
- mensaje: "Restos de frutas, verduras y alimentos pueden convertirse en abono si se gestionan bien."
- },
- "No reciclable": {
- color: "#222222",
- icono: " ", ⚫
- contenedor: "Contenedor de no aprovechables",
- mensaje: "No todo se puede reciclar. Revisa si esta sucio, mezclado o contaminado antes de decidir."
- }
- };
- async function init() {
- const modelURL = URL + "model.json";
- const metadataURL = URL + "metadata.json";
- model = await tmImage.load(modelURL, metadataURL);
- maxPredictions = model.getTotalClasses();
- webcam = new tmImage.Webcam(320, 320, true);
- await webcam.setup();
- await webcam.play();
- document.getElementById("webcam-container").innerHTML = "";
- document.getElementById("webcam-container").appendChild(webcam.canvas);
- window.requestAnimationFrame(loop);
- }
- async function loop() {
- webcam.update();
- await predict();
- window.requestAnimationFrame(loop);
- }
- async function predict() {
- const prediction = await model.predict(webcam.canvas);
- prediction.sort((a, b) => b.probability - a.probability);
- const mejor = prediction[0];
- const categoria = mejor.className;
- const confianza = Math.round(mejor.probability * 100);
- if (confianza < 65) {
- mostrarResultado("Duda", confianza, {
- color: "#ff6b6b",
- icono: " ", ❓
- contenedor: "La IA no esta segura",
- mensaje: "Acerca el residuo, mejora la luz o cambia el fondo. No deposites el residuo solo por una prediccion insegura."
- });
- return;
- }
- const info = datos[categoria] || {
- color: "#0f7b4f",
- icono: " ", ♻️
- contenedor: "Categoria detectada",
- mensaje: "Revisa las normas de separacion de residuos de tu colegio."
- };
- mostrarResultado(categoria, confianza, info);
- if (categoria !== ultimaCategoria && confianza >= 80) {
- puntos += 1;
- ultimaCategoria = categoria;
- }
- document.getElementById("reto").innerText = "Puntos verdes: " + puntos;
- }
- function mostrarResultado(categoria, confianza, info) {
- document.getElementById("categoria").innerText = info.icono + " " + categoria;
- document.getElementById("contenedor").innerText = info.contenedor;
- document.getElementById("confianza").innerText = "Confianza: " + confianza + "%";
- document.getElementById("relleno").style.width = confianza + "%";
- document.getElementById("relleno").style.background = info.color;
- document.getElementById("resultado").style.borderColor = info.color;
- document.getElementById("mensaje").innerText = info.mensaje;
- document.getElementById("mascota").innerText = confianza >= 80 ? " " : " "; 🤖♻️ 🤖🔎
- }
- </script>
+
+const URL = "PEGA_AQUI_TU_MODELO/";
+// ejemplo:
+// https://teachablemachine.withgoogle.com/models/abc123/
+
+let model;
+let webcam;
+let puntos = 0;
+let ultimaCategoria = "";
+
+const datos = {
+
+    "Plastico":{
+        color:"#f6c344",
+        icono:"🟡",
+        contenedor:"Contenedor plástico",
+        mensaje:"Reciclable si está limpio."
+    },
+
+    "Papel/Carton":{
+        color:"#3d8bfd",
+        icono:"🔵",
+        contenedor:"Contenedor papel",
+        mensaje:"Debe estar seco."
+    },
+
+    "Vidrio":{
+        color:"#35b779",
+        icono:"🟢",
+        contenedor:"Contenedor vidrio",
+        mensaje:"No mezclar con cerámica."
+    }
+
+};
+
+async function init(){
+
+    try{
+
+        const modelURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
+
+        model = await tmImage.load(modelURL, metadataURL);
+
+        webcam = new tmImage.Webcam(320,320,true);
+
+        // SOLICITA PERMISO
+        await webcam.setup();
+
+        await webcam.play();
+
+        document.getElementById("webcam-container").innerHTML = "";
+
+        document
+            .getElementById("webcam-container")
+            .appendChild(webcam.canvas);
+
+        window.requestAnimationFrame(loop);
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "No se pudo abrir la cámara.\n\n" +
+            "1. Acepta permisos\n" +
+            "2. Usa HTTPS o localhost\n" +
+            "3. No abras el HTML con doble clic"
+        );
+    }
+}
+
+async function loop(){
+
+    webcam.update();
+
+    await predict();
+
+    window.requestAnimationFrame(loop);
+}
+
+async function predict(){
+
+    const prediction = await model.predict(webcam.canvas);
+
+    prediction.sort((a,b)=>b.probability-a.probability);
+
+    const mejor = prediction[0];
+
+    const categoria = mejor.className;
+
+    const confianza = Math.round(mejor.probability * 100);
+
+    if(confianza < 65){
+
+        mostrarResultado(
+            "Duda",
+            confianza,
+            {
+                color:"#ff6b6b",
+                icono:"❓",
+                contenedor:"No estoy seguro",
+                mensaje:"Mejora la luz o acerca el objeto."
+            }
+        );
+
+        return;
+    }
+
+    const info = datos[categoria] || {
+
+        color:"#0f7b4f",
+        icono:"♻️",
+        contenedor:"Categoría detectada",
+        mensaje:"Revisa las normas de reciclaje."
+
+    };
+
+    mostrarResultado(categoria, confianza, info);
+
+    if(categoria !== ultimaCategoria && confianza >= 80){
+
+        puntos++;
+
+        ultimaCategoria = categoria;
+    }
+
+    document.getElementById("reto").innerText =
+        "Puntos verdes: " + puntos;
+}
+
+function mostrarResultado(categoria, confianza, info){
+
+    document.getElementById("categoria").innerText =
+        info.icono + " " + categoria;
+
+    document.getElementById("contenedor").innerText =
+        info.contenedor;
+
+    document.getElementById("confianza").innerText =
+        "Confianza: " + confianza + "%";
+
+    document.getElementById("relleno").style.width =
+        confianza + "%";
+
+    document.getElementById("relleno").style.background =
+        info.color;
+
+    document.getElementById("mensaje").innerText =
+        info.mensaje;
+
+    document.getElementById("mascota").innerText =
+        confianza >= 80 ? "🤖♻️" : "🤖🔎";
+}
+
+</script>
+
 </body>
 </html>
