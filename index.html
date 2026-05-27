@@ -219,17 +219,29 @@ async function init(){
 
     try{
 
+        console.log("Iniciando...");
+
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
 
+        console.log("Modelo:", modelURL);
+        console.log("Metadata:", metadataURL);
+
         model = await tmImage.load(modelURL, metadataURL);
+
+        console.log("Modelo cargado");
 
         webcam = new tmImage.Webcam(320,320,true);
 
-        // SOLICITA PERMISO
+        console.log("Solicitando cámara...");
+
         await webcam.setup();
 
+        console.log("Permiso concedido");
+
         await webcam.play();
+
+        console.log("Cámara iniciada");
 
         document.getElementById("webcam-container").innerHTML = "";
 
@@ -241,14 +253,9 @@ async function init(){
 
     }catch(error){
 
-        console.error(error);
+        console.error("ERROR REAL:", error);
 
-        alert(
-            "No se pudo abrir la cámara.\n\n" +
-            "1. Acepta permisos\n" +
-            "2. Usa HTTPS o localhost\n" +
-            "3. No abras el HTML con doble clic"
-        );
+        alert(error.message);
     }
 }
 
