@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>EcoScan IA</title>
+<title>Plasticollection IA</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 
@@ -40,7 +40,7 @@ body{
 
 .hero{
     padding:32px;
-    background:#0f7b4f;
+    background:#65b3fc;
     color:white;
 }
 
@@ -124,17 +124,16 @@ button:hover{
 
 <section class="hero">
 
-<h1>EcoScan IA</h1>
+<h1>Plasticollection IA</h1>
 
 <p>
-Apunta la cámara a un residuo y descubre cómo separarlo correctamente.
+Apunta la cámara a un residuo y descubre datos curiosos sobre este.
 </p>
 
 <div class="mascota" id="mascota">🤖♻️</div>
 
-<p>
-<strong>Reto:</strong>
-clasifica 5 residuos diferentes.
+<div id="mensaje">Plasticollection está listo.</div>
+
 </p>
 
 </section>
@@ -142,7 +141,7 @@ clasifica 5 residuos diferentes.
 <section class="panel">
 
 <button onclick="init()">
-Iniciar cámara e IA
+Iniciar cámara y modelo
 </button>
 
 <div id="webcam-container"></div>
@@ -165,13 +164,6 @@ Presiona iniciar.
 Confianza: 0%
 </div>
 
-<div id="mensaje">
-EcoBot está listo.
-</div>
-
-<div id="reto">
-Puntos verdes: 0
-</div>
 
 </div>
 
@@ -335,8 +327,6 @@ async function predict(){
         ultimaCategoria = categoria;
     }
 
-    document.getElementById("reto").innerText =
-        "Puntos verdes: " + puntos;
 }
 
 function mostrarResultado(categoria, confianza, info){
