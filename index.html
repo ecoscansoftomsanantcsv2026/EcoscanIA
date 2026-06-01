@@ -225,9 +225,9 @@ const datos = {
         mensaje:"No mezclar con cerámica."
     },
 
-    "Envase":{
+    "Platos":{
         color:"#ed1818",
-        icono:"envase.png",
+        icono:"plato.png",
         contenedor:"Contenedor vidrio",
         mensaje:"No mezclar con cerámica."
     }
@@ -306,7 +306,7 @@ async function predict(){
             confianza,
             {
                 color:"#ff6b6b",
-                icono:"❓",
+                icono:"duda.png",
                 contenedor:"No estoy seguro",
                 mensaje:"Mejora la luz o acerca el objeto."
             }
@@ -337,8 +337,9 @@ async function predict(){
 
 function mostrarResultado(categoria, confianza, info){
 
-    document.getElementById("categoria").innerText =
-        info.icono + " " + categoria;
+    document.getElementById("categoria").innerHTML =
+    `<img src="${info.icono}" class="icono-categoria">
+     ${categoria}`;
 
     document.getElementById("contenedor").innerText =
         info.contenedor;
