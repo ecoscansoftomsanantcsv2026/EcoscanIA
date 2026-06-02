@@ -437,8 +437,13 @@ function mostrarResultado(categoria, confianza, info){
     document.getElementById("mensaje").innerText =
         info.mensaje;
 
-    document.getElementById("mascota").innerText =
-        confianza >= 80 ? "🤖♻️" : "🤖🔎";
+	const mascota = document.getElementById("mascota");
+
+	if(confianza >= 80){
+    	mascota.src = "img/mascota.png";
+	}else{
+    	mascota.src = "img/duda.png";
+}
 }
 
 </script>
