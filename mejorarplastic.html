@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlastiCollection AI | Feedback</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: #eef7ff;
+            color: #2c3e50;
+            overflow-x: hidden;
+        }
+
+        /* Fondo decorativo */
+        body::before {
+            content: "";
+            position: fixed;
+            top: -10%;
+            right: -10%;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(0, 162, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+            z-index: -1;
+        }
+
+        header {
+            background: linear-gradient(135deg, #007cf0 0%, #00dfd8 100%);
+            padding: 4.5rem 1rem;
+            text-align: center;
+            color: white;
+            border-bottom-left-radius: 60px;
+            border-bottom-right-radius: 60px;
+            box-shadow: 0 10px 30px rgba(0, 124, 240, 0.2);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+        }
+
+        /* Barra de navegación mejorada */
+        nav {
+            margin: -30px auto 0;
+            max-width: 750px; /* Un poco más ancha para los dos botones */
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 12px 20px;
+            border-radius: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px; /* Espacio entre botones */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 20px;
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .nav-link {
+            padding: 12px 25px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        /* Estilo para el botón de Encuesta (Principal) */
+        .btn-encuesta {
+            background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 114, 255, 0.3);
+        }
+
+        .btn-encuesta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.5);
+            filter: brightness(1.1);
+        }
+
+        /* Estilo para el botón "Ir a PlastiCollection" (Secundario) */
+        .btn-app {
+            background-color: transparent;
+            color: #0072ff;
+            border: 2px solid #0072ff;
+        }
+
+        .btn-app:hover {
+            background-color: #f0f7ff;
+            transform: translateY(-3px);
+        }
+
+        /* Contenedor de información */
+        .container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: grid;
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 30px;
+            border: 1px solid #d1e9ff;
+            box-shadow: 0 10px 20px rgba(0, 114, 255, 0.03);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .card h2 {
+            color: #0072ff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            color: #4a606b;
+            line-height: 1.8;
+        }
+
+        .bullet {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #00dfd8;
+            border-radius: 4px;
+            margin-right: 12px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            color: #a0b1b9;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                max-width: 90%;
+            }
+            .nav-link {
+                width: 100%;
+            }
+            header h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Ayúdanos a mejorar PlastiCollection AI</h1>
+        <p>Tu opinión impulsa nuestra Inteligencia Artificial</p>
+    </header>
+
+    <nav>
+        <!-- Botón a la App Principal -->
+        <a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/" class="nav-link btn-app">Ir a PlastiCollection AI</a>
+        
+        <!-- Botón de Encuesta -->
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdzkXdqxeZzkjmKz1wE-dTZtKXNnS9WpBGbiYf4y1f6xbh5DQ/viewform?usp=publish-editor" class="nav-link btn-encuesta">Encuesta</a>
+    </nav>
+
+    <div class="container">
+        
+        <section class="card">
+            <h2>🚀 ¿Por qué tu ayuda es vital?</h2>
+            <p>
+                Al participar en nuestra encuesta de satisfacción, nos proporcionas la retroalimentación necesaria para que Plasticollection sea un servicio más efectivo e identifique el plástico con una precisión milimétrica. Tus comentarios son el motor que nos ayuda a perfeccionar los algoritmos de reciclaje.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>✨ ¿Cómo lo hacemos posible?</h2>
+            <p><span class="bullet"></span>Analizamos tus sugerencias para optimizar la interfaz de usuario.</p>
+            <p><span class="bullet"></span>Entrenamos nuestros modelos con los casos reales que nos reportas.</p>
+            <p><span class="bullet"></span>Convertimos tus ideas en nuevas funciones de escaneo inteligente.</p>
+        </section>
+
+    </div>
+
+    <footer>
+        Hecho con 💙 para la comunidad de PlastiCollection AI — 2026
+    </footer>
+
+</body>
+</html>
