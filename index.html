@@ -28,8 +28,36 @@ body{
     padding:20px;
 }
 
+.menu {
+  grid-column: span 2; /* Ocupa las dos columnas del contenedor grid */
+  width: 100%;
+  background: #000152; /* Color oscuro de fondo */
+  list-style: none;
+  margin: 0; /* Ajustado a 0 para alinearse perfectamente */
+  padding: 10px 0;
+  text-align: center;
+}
+
+.menu li {
+  display: inline-block;
+  text-align: center;
+}
+
+.menu li a {
+  padding: 12px 20px;
+  color: #ffffff;
+  display: inline-block;
+  font-family: cursive;
+  text-decoration: none; /* Quita el subrayado de los links */
+}
+
+.menu li a:hover {
+  color: rgb(255, 255, 255); /* Texto blanco al pasar el mouse */
+  background: rgb(60, 10, 110); /* Fondo un poco más claro al hacer hover */
+  border-radius: 8px;
+}
 .app{
-    width:min(980px,100%);
+    width:min(1240px,100%);
     background:rgba(255,255,255,0.92);
     border-radius:28px;
     box-shadow:0 20px 60px rgba(0,0,0,0.18);
@@ -39,34 +67,55 @@ body{
 }
 
 .hero{
-    padding:32px;
+    padding:65px;
     background:#65b3fc;
     color:#fcfafa;
 }
 
 .hero h1{
-    font-size:42px;
+    margin: 0;
+    padding: 0;
+}
+#logo img{
+	width: 350px;
+	height: auto;
+	transform: translate(-120px,-80px);
+
 }
 
 .hero p{
-    font-size:18px;
+    font-size:17px;
+    transform: translateY(-100px);
+    text-align: center;
 }
 
 .mascota{
-    font-size:88px;
-    text-align:center;
-    margin:24px 0;
+    display:flex;
+    justify-content:flex-start; /* <- esto la mueve a la izquierda */
+    align-items:center;
+    transform: translate(-60px,-110px);
+    margin:10px 0 -80px 0;
 }
 
+#mascota{
+    width:450px;
+    height:auto;
+}
+.icono-extra{
+    font-size:80px;
+    transform: translateX(-80px);
+}
 .panel{
     padding:32px;
 }
-
+#mensaje{
+	margin-top: 0;
+}
 button{
     border:none;
     border-radius:18px;
     padding:14px 20px;
-    background:#5151c9;
+    background:#3737c4;
     color:#e9e9f7;
     font-weight:bold;
     font-size:16px;
@@ -113,12 +162,14 @@ button:hover{
     vertical-align:middle;
     margin-right:8px;
 }
-@media(max-width:760px){
 
+@media(max-width:760px){
     .app{
         grid-template-columns:1fr;
     }
-
+    .menu {
+        grid-column: span 1; /* En móviles se adapta a una sola columna */
+    }
 }
 
 </style>
@@ -128,15 +179,34 @@ button:hover{
 
 <main class="app">
 
+<nav style="grid-column: span 2; width: 100%;">
+  <ul class="menu">
+    <li><a href="#inicio">Artículo</a></li>
+    <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/">Herramienta</a></li>
+    <li><a href="encuesta">Ayúdanos a mejorar</a></li>
+  
+  </ul>
+</nav>
+
 <section class="hero">
 
-<h1>Plasticollection IA</h1>
+<h1>
+<div id="logo">
+<img src="img/logo.png">	
+</div>
+</h1>
 
 <p>
 Apunta la cámara a un residuo y descubre datos curiosos sobre este.
 </p>
 
-<div class="mascota" id="mascota">🤖♻️</div>
+<div class="mascota">
+    <img id="mascota"
+         src="img/mascota.png"
+    >
+
+    <span class="icono-extra">♻️</span>
+</div>
 
 <div id="mensaje">Plasticollection está listo.</div>
 
@@ -147,7 +217,7 @@ Apunta la cámara a un residuo y descubre datos curiosos sobre este.
 <section class="panel">
 
 <button onclick="init()">
-Iniciar cámara y modelo
+Iniciar Plasticollection
 </button>
 
 <div id="webcam-container"></div>
@@ -159,7 +229,7 @@ Esperando residuo...
 </h2>
 
 <div id="contenedor">
-Presiona iniciar.
+Presiona Iniciar.
 </div>
 
 <div class="barra">
@@ -187,6 +257,9 @@ let model;
 let webcam;
 let puntos = 0;
 let ultimaCategoria = "";
+
+let ultimoCambioUI = 0;
+const INTERVALO_UI = 500; // 0.5 segundos
 
 const datos = {
 
@@ -306,7 +379,7 @@ async function predict(){
             confianza,
             {
                 color:"#ff6b6b",
-                icono:"duda.png",
+                icono:"img/duda.png",
                 contenedor:"No estoy seguro",
                 mensaje:"Mejora la luz o acerca el objeto."
             }
@@ -317,23 +390,31 @@ async function predict(){
 
     const info = datos[categoria] || {
 
-        color:"#0f7b4f",
-        icono:"♻️",
-        contenedor:"Categoría detectada",
-        mensaje:"Revisa las normas de reciclaje."
+    color:"#0f7b4f",
+    icono:"♻️",
+    contenedor:"Categoría detectada",
+    mensaje:"Revisa las normas de reciclaje."
 
-    };
+	};	
 
-    mostrarResultado(categoria, confianza, info);
+	const ahora = Date.now();
 
-    if(categoria !== ultimaCategoria && confianza >= 80){
+	if(ahora - ultimoCambioUI >= INTERVALO_UI){
 
-        puntos++;
+    	mostrarResultado(categoria, confianza, info);
 
-        ultimaCategoria = categoria;
-    }
+    	ultimoCambioUI = ahora;
+
+    	if(categoria !== ultimaCategoria && confianza >= 80){
+
+        	puntos++;
+
+        	ultimaCategoria = categoria;
+    	}
+	}
 
 }
+
 
 function mostrarResultado(categoria, confianza, info){
 
