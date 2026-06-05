@@ -35,7 +35,6 @@
         header {
             background: linear-gradient(135deg, #007cf0 0%, #00dfd8 100%);
             padding: 4.5rem 1rem;
-            text-align: center;
             color: white;
             border-bottom-left-radius: 60px;
             border-bottom-right-radius: 60px;
@@ -45,12 +44,21 @@
         header h1 {
             font-size: 3rem;
             font-weight: 800;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+            text-align: center;
         }
 
         header p {
             font-size: 1.3rem;
             opacity: 0.95;
+            text-align: center;
+        }
+
+        header img {
+            width: 350px;
+            text-align: left;
+            position: absolute;
+            transform: translateY(-60px);
         }
 
         /* Barra de navegación mejorada */
@@ -181,6 +189,7 @@
 <body>
 
     <header>
+        <img src="img/logo.png">
         <h1>Ayúdanos a mejorar PlastiCollection AI</h1>
         <p>Tu opinión impulsa nuestra Inteligencia Artificial</p>
     </header>
