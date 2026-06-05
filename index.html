@@ -23,59 +23,110 @@ body{
     color:#123;
     min-height:80vh;
     display:flex;
+    flex-direction: column;
     justify-content:center;
     align-items:center;
-    padding:10px;
+    padding-bottom: 10px;
 }
 
-.menu {
-  grid-column: span 2; /* Ocupa las dos columnas del contenedor grid */
-  width: 100%;
-  background: #000152; /* Color oscuro de fondo */
-  list-style: none;
-  margin: 0; /* Ajustado a 0 para alinearse perfectamente */
-  padding: 10px 0;
-  text-align: center;
+
+header {
+            background: linear-gradient(135deg, #007cf0  0%, #00dfd8 100%);
+            padding: 3.5rem 1rem;
+            color: white;
+            border-bottom-left-radius: 60px;
+            border-bottom-right-radius: 60px;
+            box-shadow: 0 10px 30px rgba(0, 124, 240, 0.2);
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        header,
+        nav{
+            width: 100%;
+        }
+        header img {
+            width: 350px;
+            text-align: left;
+            position: absolute;
+            transform: translateY(-60px);
+        }
+nav {
+            margin: -30px auto 0;
+            max-width: 750px; /* Un poco más ancha para los dos botones */
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 20px;
+            border-radius: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px; /* Espacio entre botones */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 20px;
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        nav ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+
+    display:flex;      /* coloca los li en fila */
+    flex-direction:row;
+    gap:15px;
+
+    align-items:center;
+    justify-content:center;
 }
 
-.menu li {
-  display: inline-block;
-  text-align: center;
+nav li{
+    margin:0;
 }
 
-.menu li a {
-  padding: 12px 20px;
-  color: #ffffff;
-  font-weight: bold;
-  display: inline-block;
-  text-decoration: none; /* Quita el subrayado de los links */
-}
+        .nav-link {
+            padding: 12px 25px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .btn-encuesta {
+            background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 114, 255, 0.3);
+        }
 
-.menu li a:hover {
-  color: rgb(255, 255, 255); /* Texto blanco al pasar el mouse */
-  background: rgb(60, 10, 110); /* Fondo un poco más claro al hacer hover */
-  border-radius: 8px;
-}
+        .btn-encuesta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.5);
+            filter: brightness(1.1);
+        }
 .app{
-    width:min(1240px,100%);
+    width:min(1340px,100%);
     background:rgba(255,255,255,0.92);
     border-radius:28px;
     box-shadow:0 20px 60px rgba(0,0,0,0.18);
     overflow:hidden;
     display:grid;
     grid-template-columns:1fr 1fr;
+    margin-top: 20px;
 }
 
 .hero{
-    padding:65px;
-    background:#65b3fc;
+    padding:60px;
+    background:#009dff;
     color:#fcfafa;
 }
 
-.hero h1{
-    margin: 0;
-    padding: 0;
-}
 #logo img{
 	width: 350px;
 	height: auto;
@@ -85,16 +136,15 @@ body{
 
 .hero p{
     font-size:24px;
-    transform: translateY(-100px);
     text-align: center;
+    margin-top: 10px
 }
 
 .mascota{
     display:flex;
     justify-content:flex-start; /* <- esto la mueve a la izquierda */
     align-items:center;
-    transform: translate(-60px,-110px);
-    margin:10px 0 -80px 0;
+    margin:20px 0;
 }
 
 #mascota{
@@ -116,7 +166,7 @@ button{
     border:none;
     border-radius:18px;
     padding:14px 20px;
-    background:#3737c4;
+    background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
     color:#e9e9f7;
     font-weight:bold;
     font-size:16px;
@@ -178,24 +228,25 @@ button:hover{
 
 <body>
 
-<main class="app">
+<header>
+    <img src="img/logo.png">
+    <h1>¡Bienvenido a Plasticollection!</h1>
+</header>
 
-<nav style="grid-column: span 2; width: 100%;">
-  <ul class="menu">
-	  <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/instrucciones.html">Instrucciones</a></li>
-	  <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/">Herramienta</a></li>
-	  <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/articulo.html">Artículo</a></li>
-      <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/mejorarplastic.html">Ayúdanos a mejorar</a></li>
+<nav>
+  <ul>
+    <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/articulo.html" class="nav-link btn-encuesta">Instrucciones</a></li>
+    <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/" class="nav-link btn-encuesta">Herramienta</a></li
+    ><li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/instrucciones.html" class="nav-link btn-encuesta">Artículo</a></li>
+    <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/mejorarplastic.html" class="nav-link btn-encuesta">Ayúdanos a mejorar</a></li>
+  
   </ul>
 </nav>
 
+<main class="app">
+
 <section class="hero">
 
-<h1>
-<div id="logo">
-<img src="img/logo.png">	
-</div>
-</h1>
 
 <p>
 Apunta la cámara a un residuo y descubre datos curiosos sobre este.
