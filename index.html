@@ -84,7 +84,7 @@ body{
 }
 
 .hero p{
-    font-size:17px;
+    font-size:24px;
     transform: translateY(-100px);
     text-align: center;
 }
@@ -110,6 +110,7 @@ body{
 }
 #mensaje{
 	margin-top: 0;
+	font-size: 24px
 }
 button{
     border:none;
@@ -181,9 +182,10 @@ button:hover{
 
 <nav style="grid-column: span 2; width: 100%;">
   <ul class="menu">
-    <li><a href="#inicio">Artículo</a></li>
-    <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/">Herramienta</a></li>
-    <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/mejorarplastic.html">Ayúdanos a mejorar</a></li>
+    <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/articulo.html">Artículo</a></li>
+      <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/">Herramienta</a></li>
+      <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/instrucciones.html">Instrucciones</a></li>
+      <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/mejorarplastic.html">Ayúdanos a mejorar</a></li>
   
   </ul>
 </nav>
@@ -198,7 +200,7 @@ button:hover{
 
 <p>
 Apunta la cámara a un residuo y descubre datos curiosos sobre este.
-</p>
+
 
 <div class="mascota">
     <img id="mascota"
@@ -267,35 +269,35 @@ const datos = {
         color:"#5481eb",
         icono:"img/cubierto.png",
         contenedor:"",
-        mensaje:"cubierto."
+        mensaje:"Procura desecharlos limpios. El plástico recuperado de estos residuos puede aprovecharse para fabricar mobiliario urbano, materas y otros artículos de larga duración."
     },
 
     "Tapas":{
         color:"#23cf43",
         icono:"img/tapa.png",
         contenedor:"",
-        mensaje:"tapa."
+        mensaje:"Llévalas a un punto especializado de recolección. El colegio lleva estas tapas a fundaciones que apoyan causas sociales mientras que el material reciclado se transforma en nuevos productos plásticos."
     },
 
     "Botellas":{
         color:"#c4c72e",
         icono:"img/botella.png",
         contenedor:"",
-        mensaje:"Botella"
+        mensaje:"Vacía, enjuaga y aplasta la botella antes de reciclarla. En el país, las botellas PET recicladas suelen convertirse en nuevas botellas, fibras para textiles y empaques."
     },
 
     "Bolsas":{
         color:"#eb7c44",
         icono:"img/bolsa.png",
         contenedor:"",
-        mensaje:"bolsa."
+        mensaje:"Reutilízalas siempre que sea posible antes de desecharlas. Cuando son recicladas, pueden convertirse en nuevas bolsas, madera plástica y elementos para construcción y mobiliario."
     },
 
     "Vasos":{
         color:"#b734e3",
         icono:"img/vaso.png",
         contenedor:"",
-        mensaje:"vaso."
+        mensaje:"Límpialo antes de desecharlo. El plástico recuperado de vasos y otros envases puede utilizarse para fabricar nuevos productos plásticos y materiales de uso industrial."
     },
 
     "Platos":{
@@ -439,10 +441,12 @@ function mostrarResultado(categoria, confianza, info){
 
 	const mascota = document.getElementById("mascota");
 
-	if(confianza >= 80){
-    	mascota.src = "img/mascota.png";
-	}else{
-    	mascota.src = "img/duda.png";
+if(confianza >= 80){
+    mascota.src = "img/mascota.png";
+    mascota.style.width = "450px";
+}else{
+    mascota.src = "img/duda.png";
+    mascota.style.width = "220px";
 }
 }
 
