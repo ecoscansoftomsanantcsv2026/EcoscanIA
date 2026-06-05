@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Los Plásticos - Gestión Ambiental</title>
+  <style type="text/css"> 
+    /* --- Configuración Global y Colores Azules --- */
+    :root {
+      --bg-color: #f0f4f8;          /* Azul grisáceo muy claro y limpio */
+      --card-bg: #ffffff;           /* Blanco puro para las tarjetas */
+      --primary-blue: #1e3a8a;      /* Azul oscuro para títulos principales */
+      --secondary-blue: #2563eb;    /* Azul vibrante para subtítulos y acentos */
+      --light-blue: #dbeafe;        /* Fondo azul claro para el destacado */
+      --text-main: #1e293b;         /* Gris azulado oscuro para máxima legibilidad */
+      --nav-bg: rgba(255, 255, 255, 0.9);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background-color: var(--bg-color); 
+      color: var(--text-main);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    /* --- Contenedor Principal --- */
+    .container {
+      max-width: 850px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* --- Menú de Navegación --- */
+    .menu-container {
+      position: sticky;
+      top: 0;
+      background: var(--nav-bg);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 2px 12px rgba(30, 58, 138, 0.08);
+      z-index: 1000;
+    }
+
+    .menu {
+      max-width: 850px;
+      margin: 0 auto;
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      padding: 15px 20px;
+    }
+
+    .menu li {
+      margin: 0 12px;
+    }
+
+    .menu li a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 500;
+      font-size: 16px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      transition: all 0.25s ease-in-out;
+    }
+
+    /* Animación suave al pasar el cursor */
+    .menu li a:hover {
+      color: #ffffff;
+      background-color: var(--secondary-blue);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    /* --- Secciones de Contenido --- */
+    h1 {
+      color: var(--primary-blue);
+      font-size: 42px;
+      font-weight: 800;
+      margin-top: 20px;
+      margin-bottom: 25px;
+      letter-spacing: -0.5px;
+    }
+
+    /* Línea decorativa azul debajo del título principal */
+    h1::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 4px;
+      background: var(--secondary-blue);
+      margin-top: 8px;
+      border-radius: 2px;
+    }
+
+    /* Tarjeta de Contenido Estilo Premium */
+    .content-card {
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(30, 58, 138, 0.05);
+      border: 1px solid rgba(37, 99, 235, 0.05);
+      animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      font-size: 26px;
+      color: var(--primary-blue);
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 16.5px;
+      color: var(--text-main);
+      margin-bottom: 25px;
+    }
+
+    h3 {
+      font-size: 20px;
+      color: var(--secondary-blue);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    /* Bloque de Recomendaciones en Azul Claro */
+    .recommendations {
+      background-color: var(--light-blue);
+      border-left: 4px solid var(--secondary-blue);
+      padding: 20px;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .recommendations p {
+      margin-bottom: 0;
+      color: #1e3a8a;
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    /* --- Adaptación para Pantallas Móviles --- */
+    @media (max-width: 600px) {
+      h1 { font-size: 32px; }
+      h2 { font-size: 22px; }
+      .menu { flex-wrap: wrap; padding: 10px; }
+      .menu li { margin: 5px 8px; }
+      .content-card { padding: 25px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menú de Navegación -->
+  <div class="menu-container">
+    <ul class="menu">
+      <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/articulo.html">Artículo</a></li>
+      <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/">Herramienta</a></li>
+      <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/instrucciones.html">Instrucciones</a></li>
+      <li><a href="https://ecoscansoftomsanantcsv2026.github.io/EcoscanIA/mejorarplastic.html">Ayúdanos a mejorar</a></li>
+    </ul>
+  </div>
+
+  <!-- Contenedor del Contenido Principal -->
+  <div class="container">
+    <h1>Instruciones</h1>
+
+    <div class="content-card">
+      <h2>¿Cómo usar PlastiCollection?</h2>
+      <p>Sigue estos pasos para lograr identificar el tipo de plástico que posees.<br> 
+        <br>Presiona el botón “Iniciar cámara y modelo”.<br> 
+        <br>Te aparecerá una ventana solicitando el acceso del equipo a la cámara. Presiona “Permitir”, de lo contrario no podrás hacer uso de la herramienta.<br>
+        <br>La página te mostrará un recuadro de tu cámara, muestra hacia la cámara el objeto plástico que desees identificar.<br>
+        <br>En la parte inferior aparece una barra con el título “Confianza”, esta es la encargada de mostrarte el tipo de plástico que tienes y qué tan seguro está la herramienta de esta respuesta.<br>
+        <br>Lee las indicaciones que aparecen sobre el correcto manejo de este residuo en el artículo. <br></p>
+
+      <h3>Sugerencias:</h3>
+      <div class="recommendations">
+        <p>PlastiCollection funciona a través de tu cámara, por lo cual se puede confundir a veces con ciertos objetos.<br>
+          <br>Con el fin de obtener los mejores resultados posibles intenta aplicar estas sugerencias; esto le ayudará a <i>Plasticollection</i> identificar de manera más rápida tu residuo, además de aumentar su confiabilidad.<br>
+          <br>Al momento de utilizar la herramienta, intenta que la cámara no esté apuntando hacia la luz, ya que esto puede volver la imagen difícil de identificar para el programa.<br>
+          <br>Intenta mostrar el objeto a la cámara a una distancia en la que no se corte ninguna parte del residuo. <b>¡Cuidado!</b> Tampoco lo pongas demasiado lejos, ya que el programa necesita identificar claramente las características del residuo.<br> <br>Puedes mostrarle a la cámara el residuo en el ángulo y la posición que quieras, sin embargo, si notas que no se está detectando efectivamente el residuo intenta girarlo, acercarlo a la cámara, cambiarlo de ángulo o posición.<br></p>
+
+      </div>
+    </div>
+
+</div>
